@@ -15,6 +15,7 @@ This repository is designed to help you learn and practice **Backend Development
 ### 2. Clone the Repository
 
 Open terminal and run:
-```bash
+
 git clone https://github.com/<your-username>/backend-training.git
 cd backend-training
+
