@@ -1,5 +1,35 @@
 {
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21"
-  }
+  },
+  "name": "node-training",
+  "version": "1.0.0",
+  "description": "This repository is designed to help you learn and practice **Backend Development** using **Node.js**, **Express.js**, and essential tools and concepts. Each folder contains a hands-on assignment or concept with its own working code.",
+  "main": "SaveResults.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mustafa-successiveTech/Backend-Training.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mustafa-successiveTech/Backend-Training/issues"
+  },
+  "homepage": "https://github.com/mustafa-successiveTech/Backend-Training#readme"
 }
