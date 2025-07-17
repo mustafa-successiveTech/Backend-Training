@@ -1,2 +1,2 @@
-node_modules/
+/node_modules
 # added node modules i .gitignore
