@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "express-rate-limit": "^8.0.1",
+    "faker": "^6.6.6",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21"
   },
@@ -13,23 +16,14 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.0.14",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "scripts": {
+    "dev": "ts-node index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node index.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mustafa-successiveTech/Backend-Training.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mustafa-successiveTech/Backend-Training/issues"
-  },
-  "homepage": "https://github.com/mustafa-successiveTech/Backend-Training#readme"
+    "start": "node index.js"
+  }
 }
