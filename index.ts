@@ -1,4 +1,3 @@
-
 import express from "express";
 import joiValidatorRoutes from "./src/assignment4/routes/joiValidatorRoutes";
 
