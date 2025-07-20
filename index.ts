@@ -1,6 +1,12 @@
-const { add, sub, mult, div } = require("./lib/math");
+import express from 'express';
+import healthRoutes from './src/assignment7/routes/healthRoutes';
 
-console.log(add(10, 5)); 
-console.log(sub(10, 5)); 
-console.log(mult(10, 5)); 
-console.log(div(10, 5)); 
+const app = express();
+
+const PORT = process.env.PORT || 3001;
+
+app.use('/api', healthRoutes);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
