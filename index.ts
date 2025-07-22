@@ -4,14 +4,13 @@ import userRoutes from "./src/assignment3/routes/userRoutes";
 import ErrorHandlingMiddleware from "./src/assignment3/middleware/errorHandlingMiddleware";
 import { addCustomHeader } from "./src/assignment3/middleware/customHeader";
 import { Rate_limit } from "./src/assignment3/middleware/Rate_limiting";
+import joiValidatorRoutes from "./src/assignment4/routes/joiValidatorRoutes"
 
 const app = express();
 
 app.use(express.json());
 
-app.use(Rate_limit(5, 5));
-
-app.use(addCustomHeader("XYZ", "1.0.0"));
+app.use('/assignment-4', joiValidatorRoutes)
 
 app.get("/", (req, res) => {
   res.send(`Hello with custom header! ${res.getHeader("XYZ")}`);
