@@ -6,16 +6,10 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21"
   },
-  "name": "node-training",
-  "version": "1.0.0",
-  "description": "This repository is designed to help you learn and practice **Backend Development** using **Node.js**, **Express.js**, and essential tools and concepts. Each folder contains a hands-on assignment or concept with its own working code.",
-  "main": "SaveResults.js",
-  "directories": {
-    "lib": "lib"
-  },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
-    "@types/joi": "^17.2.2",
+    "@types/faker": "^6.6.8",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.0.14",
     "dotenv": "^17.2.0",
