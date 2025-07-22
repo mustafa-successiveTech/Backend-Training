@@ -1,7 +1,11 @@
+import "./types/express";
 import express from "express";
-import createError from "http-errors";
-import { Request, Response, NextFunction } from "express";
-import assignment5 from "./src/assignment5/routes/errorRoutes";
+import userRoutes from "./src/assignment3/routes/userRoutes";
+import ErrorHandlingMiddleware from "./src/assignment3/middleware/errorHandlingMiddleware";
+import { addCustomHeader } from "./src/assignment3/middleware/customHeader";
+import { Rate_limit } from "./src/assignment3/middleware/Rate_limiting";
+import joiValidatorRoutes from "./src/assignment4/routes/joiValidatorRoutes"
+import assignment5 from "./src/assignment5/routes/assignment5";
 
 const app = express();
 

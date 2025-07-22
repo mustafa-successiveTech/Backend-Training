@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use(express.json());
 
-console.log("Error ROutes");
+console.log("Error Routes");
 
 // app.use('/async-route', asyncErrorRoute);
 
