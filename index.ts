@@ -5,20 +5,17 @@ import ErrorHandlingMiddleware from "./src/assignment3/middleware/errorHandlingM
 import { addCustomHeader } from "./src/assignment3/middleware/customHeader";
 import { Rate_limit } from "./src/assignment3/middleware/Rate_limiting";
 import joiValidatorRoutes from "./src/assignment4/routes/joiValidatorRoutes"
+import assignment5 from "./src/assignment5/routes/assignment5";
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/assignment-4', joiValidatorRoutes)
+app.use("/assignment-5", assignment5);
 
-app.get("/", (req, res) => {
-  res.send(`Hello with custom header! ${res.getHeader("XYZ")}`);
-});
-
-app.use("/assignment3", userRoutes);
-
-app.use(ErrorHandlingMiddleware);
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   next(createError(404, "Not Found"));
+// });
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
