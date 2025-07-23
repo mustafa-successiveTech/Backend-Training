@@ -1,10 +1,15 @@
-import express from "express";
-import  { HealthController } from "../controller/HealthController";
+import express from 'express';
+import { HealthController } from '../controller/HealthController';
 
-const router = express.Router();
+export class HealthRoutes {
+  public router = express.Router(); 
+  private healthController = new HealthController();  
 
-const healthController = new HealthController();
+  constructor() {
+    this.initializeRoutes(); 
+  }
 
-router.get("/health", healthController.check);
-
-export default router;
+  private initializeRoutes() {
+    this.router.get('/health', this.healthController.checkHealth); 
+  }
+}

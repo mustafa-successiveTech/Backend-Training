@@ -1,15 +1,9 @@
-import { Request, Response } from "express";
-import { HealthService } from "../services/HealthServices";
-
 export class HealthController {
-  private healthService: HealthService;
-
-  constructor() {
-    this.healthService = new HealthService();
+  public checkHealth(req: any, res: any) {
+    res.status(200).json({
+      status: "UP",                   
+      timestamp: new Date(),        
+      uptime: process.uptime(),      
+    });
   }
-
-  check = (req: Request, res: Response) => {
-    const result = this.healthService.checkHealth();
-    res.status(200).json(result);
-  };
 }
