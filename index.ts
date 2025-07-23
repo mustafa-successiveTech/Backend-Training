@@ -1,17 +1,14 @@
 import "./types/express";
 import express from "express";
-import userRoutes from "./src/assignment3/routes/userRoutes";
-import ErrorHandlingMiddleware from "./src/assignment3/middleware/errorHandlingMiddleware";
-import { addCustomHeader } from "./src/assignment3/middleware/customHeader";
-import { Rate_limit } from "./src/assignment3/middleware/Rate_limiting";
-import joiValidatorRoutes from "./src/assignment4/routes/joiValidatorRoutes"
-import assignment5 from "./src/assignment5/routes/assignment5";
+import {HealthRoutes} from './src/assignment7/routes/healthRoutes'
+
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/assignment-5", assignment5);
+const healthRoutes = new HealthRoutes();        
+app.use('/', healthRoutes.router); 
 
 // app.use((req: Request, res: Response, next: NextFunction) => {
 //   next(createError(404, "Not Found"));
