@@ -1,20 +1,19 @@
-import "./types/express";
-import express from "express";
-import {HealthRoutes} from './src/assignment7/routes/healthRoutes'
+import express from 'express';
+import dotenv from 'dotenv';
+import user from './src/assignment9/routes/user.route';
+import { connectDB } from './src/assignment9/config/db'
 
 
+dotenv.config();
+const PORT = process.env.PORT || 3000;
+
+connectDB();
 const app = express();
-
 app.use(express.json());
 
-const healthRoutes = new HealthRoutes();        
-app.use('/', healthRoutes.router); 
+console.log("Before main route");
+app.use('/create-api', user);
 
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//   next(createError(404, "Not Found"));
-// });
-
-const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
