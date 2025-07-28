@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import bcrypt, { compare } from "bcrypt";
 import { loginUser } from "../services/user.service";
 import jwt from "jsonwebtoken";
+import { log } from "console";
 
 export const handleRegisterMiddleware = async (req : Request, res : Response, next : NextFunction) => {
     try {
@@ -28,19 +29,19 @@ export const handleLoginMiddleware = async (req : Request, res : Response, next 
         }
 
         const password = req.body.password;
-        console.log("Password", typeof password);
-        console.log("User password",typeof  user.password);
+        console.log("Password", password);
+        console.log("User password", user.password);
         const isValidPassword = await bcrypt.compare(password, user.password);
+        console.log(isValidPassword);
 
         if(!isValidPassword) {  
             console.log("Invalid Password");
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-
-        const token = jwt.sign({userId : user._id}, process.env.SECRET_KEY as string, { expiresIn: '1h' });
+        console.log("Before token");
+        const token = jwt.sign({userId : user._id}, process.env.JWT_SECRET as string, { expiresIn: '1h' });
         console.log("Token", token);
         res.status(200).json({ message: "Login successful", token });
-        next();
         
     } catch(err) {
         console.error('Error in handleLoginMiddleware', err);
