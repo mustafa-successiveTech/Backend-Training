@@ -1,27 +1,30 @@
-import { Request, Response } from "express";
-import { loginUser, registerUser } from "../services/user.service";
+import { Request, Response } from 'express';
+import bcrypt from 'bcrypt';
+import User from '../models/user.model';
+import { generateToken } from '../utils/jwt';
 
-export const handleRegisterController = async (req: Request, res: Response) => {
-  try {
-    const user = await registerUser(req.body);
-    console.log(user);
-    res.status(201).json("User Created");
-  }catch (err) {
-    console.log(err);
-  } 
+export const registerUser = async (req: Request, res: Response) => {
+  const { name, email, password } = req.body;
+
+  const existingUser = await User.findOne({ email });
+  if (existingUser) return res.status(400).json({ message: 'User already exists' });
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = await User.create({ name, email, password: hashedPassword });
+  console.log(user);
+
+  res.status(201).json({ message: 'User registered successfully' });
 };
 
-export const handleLoginController = async (req: Request, res: Response) => {
-  try {
-    const user = await loginUser(req.body);
-    if(!user) {
-        console.log("User controller");
-        return res.status(401).json("Invalid Credentials");
-    }
-    console.log(user);
-    res.status(200).json(user);
-  } catch (err) {
-    console.log(err);
-    return res.status(403).json("Forbidden");
-  }
+export const loginUser = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+
+  const token = generateToken(user._id.toString());
+  res.json({ token });
 };

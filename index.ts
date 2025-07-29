@@ -1,19 +1,22 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import user from './src/assignment10/routes/user.route';
-import {mongoDB} from './src/assignment10/config/db';
-
+import { mongoDB } from './public/config/db';
+import authRoutes from './src/assignment10/routes/user.route';
 
 dotenv.config();
-const PORT = process.env.PORT || 3000;
 
-mongoDB();
 const app = express();
 app.use(express.json());
 
-console.log("1");
-app.use('/assignment10', user);
+const PORT = process.env.PORT || 3000;
+
+mongoDB();
+
+app.use('/assignment-10', authRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+export default app;

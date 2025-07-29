@@ -1,4 +1,4 @@
-import RegisterUser from "../models/user.schema";
+import RegisterUser from "../models/user.model";
 
 export const CreateUser = async (data: {
   name: string;

@@ -1,49 +1,17 @@
-import { Request, Response, NextFunction } from "express";
-import bcrypt, { compare } from "bcrypt";
-import { loginUser } from "../services/user.service";
-import jwt from "jsonwebtoken";
-import { log } from "console";
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import { verifyToken } from '../utils/jwt';
 
-export const handleRegisterMiddleware = async (req : Request, res : Response, next : NextFunction) => {
-    try {
-        const password = req.body.password;
-        const hashedPassword = await bcrypt.hash(password, 10);
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith('Bearer ')) return res.status(401).json({ message: 'No token provided' });
 
-        req.body.password = hashedPassword;
-        next(); 
-    } catch(err) {
-        console.error('Error while hashing password', err);
-    }
-}
-
-export const handleLoginMiddleware = async (req : Request, res : Response, next : NextFunction)  => {
-    
-    try {
-        console.log("3");
-        const user = await loginUser(req.body);
-        console.log("User in middleware", user);
-
-        if(!user) {
-            console.log("User not get");
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
-        const password = req.body.password;
-        console.log("Password", password);
-        console.log("User password", user.password);
-        const isValidPassword = await bcrypt.compare(password, user.password);
-        console.log(isValidPassword);
-
-        if(!isValidPassword) {  
-            console.log("Invalid Password");
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-        console.log("Before token");
-        const token = jwt.sign({userId : user._id}, process.env.JWT_SECRET as string, { expiresIn: '1h' });
-        console.log("Token", token);
-        res.status(200).json({ message: "Login successful", token });
-        
-    } catch(err) {
-        console.error('Error in handleLoginMiddleware', err);
-    }
-}
+  const token = authHeader.split(' ')[1];
+  try {
+    const decoded = verifyToken(token) as { userId: string };
+    (req as any).user = decoded;
+    next();
+  } catch {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
