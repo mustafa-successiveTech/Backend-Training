@@ -24,5 +24,5 @@ app.use("/", healthRoutes.router);
 const PORT = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGO_URI!).then(() => {
     console.log("Connected to MongoDB");
-  app.listen(3000, () => console.log("🚀 Server on http://localhost:3000"));
+  app.listen(3000, () => console.log(" Server on http://localhost:3000"));
 });
