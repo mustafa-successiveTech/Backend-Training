@@ -6,9 +6,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const secret_key = process.env.jwt_secret;
+const secret_key = process.env.JWT_SECRET;
 function AuthMiddleware(req, res, next) {
-    const authHeader = req.headers["authorization"];
+    const authHeader = req.headers.authorization;
+    console.log(authHeader);
+    //   if (
+    //     !authHeader ||
+    //     typeof authHeader !== "string" ||
+    //     !authHeader.startsWith("Bearer ")
+    //   ) {
+    //     return res
+    //       .status(401)
+    //       .json({ message: "Unauthorized: Missing or malformed token" });
+    //   }
     console.log(authHeader, "hgcjycycjhcvkuvkj,hv");
     const authToken = authHeader && authHeader.split(" ")[1];
     if (!authToken) {
