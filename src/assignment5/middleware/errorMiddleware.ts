@@ -1,12 +1,3 @@
-import express, { Request, Response, NextFunction } from 'express';
-import createError from 'http-errors';
+import { ErrorTestController } from "../controller/IErrorController";
 
-const app = express();
-
-
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    `Port running on ${PORT}`;
-})
+export const errorTestControllerObject = ErrorTestController.getInstance();
