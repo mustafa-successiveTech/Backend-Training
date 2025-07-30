@@ -1,28 +1,22 @@
-import "./types/express";
-import express from "express";
-import mongoose from "mongoose";
-import { HealthRoutes } from "./src/assignment7/routes/healthRoutes";
-import countries from "./src/assignment8/routes/countries";
-import { setupSwagger } from "./src/assignment8/swagger";
-import dotenv from "dotenv";
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import { mongoDB } from './public/config/db';
+import authRoutes from './src/assignment10/routes/user.route';
 
 dotenv.config();
-export const app = express();
+
+const app = express();
 app.use(express.json());
 
-console.log("Before swagger");
-app.use("/api/countries", countries);
-setupSwagger(app);
+const PORT = process.env.PORT || 3000;
 
-const healthRoutes = new HealthRoutes();
-app.use("/", healthRoutes.router);
+mongoDB();
 
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//   next(createError(404, "Not Found"));
-// });
+app.use('/assignment-10', authRoutes);
 
-const PORT = process.env.PORT || 3001;
-mongoose.connect(process.env.MONGO_URI!).then(() => {
-    console.log("Connected to MongoDB");
-  app.listen(3000, () => console.log(" Server on http://localhost:3000"));
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
+
+export default app;
