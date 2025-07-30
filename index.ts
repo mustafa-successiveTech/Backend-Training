@@ -13,4 +13,4 @@ app.use('/assignment-11', authRoutes);
 
 app.listen(PORT,() => {
     console.log(`Server is running on port ${PORT}`);
-})
+});
