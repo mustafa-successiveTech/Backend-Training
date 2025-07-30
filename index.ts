@@ -1,6 +1,5 @@
 import "./types/express";
 import express from "express";
-import { HealthRoutes } from "./src/assignment7/routes/healthRoutes";
 import { HelmetWrapper } from "./src/assignment12/middlewares/HelmetWrapper";
 import { RateLimit } from "./src/assignment12/middlewares/rateLimitting";
 import { securityHeader } from "./src/assignment12/middlewares/securityHeader";
