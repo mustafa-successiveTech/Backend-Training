@@ -36,7 +36,6 @@
     "test": "jest",
     "dev": "ts-node index.ts",
     "build": "tsc",
-    "start": "node index.js",
-    "test": "jest"
+    "start": "node index.js"
   }
 }
