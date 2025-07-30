@@ -4,9 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const AuthMiddleware_1 = __importDefault(require("../middleware/AuthMiddleware"));
 const router = express_1.default.Router();
-router.get("/profile", AuthMiddleware_1.default, (req, res) => {
-    res.json({ message: "Access Granted" });
-});
+router.use(express_1.default.json());
+console.log("Error Routes");
+// app.use('/async-route', asyncErrorRoute);
+console.log('Async');
+// app.use("/error-route", errorRoutes);
+router.use("/router", router);
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   next(createError(404, "Not Found"));
+// });
 exports.default = router;
