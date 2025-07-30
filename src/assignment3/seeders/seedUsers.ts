@@ -6,7 +6,7 @@ type User = {
     age: number
 };
 
-export default function SeededUser (count : number ) : User[] {
+export default function SeededUser(count : number ) : User[] {
     const users = SeededData.slice(0, count);
     console.log(users);
 

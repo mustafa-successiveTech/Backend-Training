@@ -1,17 +1,10 @@
-import express, { Request, Response, NextFunction } from 'express';
-import createError from 'http-errors';
+import express from "express";
+import { errorTestControllerObject } from "../middleware/errorMiddleware";
 
 const router = express.Router();
 
-router.get('/async-error', async (req : Request, res : Response, next : NextFunction) => {
-    console.log("Before try");
-  try {
-    console.log("Inside try");
-    await Promise.reject(new Error('Something went wrong in async!'));
-  } catch (err : any) {
-    next(createError(500, err.message));  
-  }
-});
+router.get("/async-error", (req, res, next) =>
+  errorTestControllerObject.throwAsyncError(req, res, next)
+);
 
 export default router;
-
