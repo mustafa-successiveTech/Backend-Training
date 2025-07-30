@@ -1,20 +1,29 @@
 import "./types/express";
 import express from "express";
-import {HealthRoutes} from './src/assignment7/routes/healthRoutes'
-
+import { HealthRoutes } from "./src/assignment7/routes/healthRoutes";
+import { HelmetWrapper } from "./src/assignment12/middlewares/HelmetWrapper";
+import { RateLimit } from "./src/assignment12/middlewares/rateLimitting";
+import { securityHeader } from "./src/assignment12/middlewares/securityHeader";
 
 const app = express();
 
 app.use(express.json());
 
-const healthRoutes = new HealthRoutes();        
-app.use('/', healthRoutes.router); 
+app.use(HelmetWrapper.apply());
+app.use(RateLimit.apply());
+app.use(securityHeader.apply);
 
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//   next(createError(404, "Not Found"));
-// });
+app.get("/", (req, res) => {
+  res.send("Secure App");
+});
+
+app.get("/test", (req, res) => {
+  res.status(200).send("Headers set");
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+export default app;
