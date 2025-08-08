@@ -34,7 +34,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "ts-node index.ts",
+    "dev": "nodemon index.ts",
     "build": "tsc",
     "start": "node index.js"
   }

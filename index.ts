@@ -3,6 +3,7 @@ import express from "express";
 import { HelmetWrapper } from "./src/assignment12/middlewares/HelmetWrapper";
 import { RateLimit } from "./src/assignment12/middlewares/rateLimitting";
 import { securityHeader } from "./src/assignment12/middlewares/securityHeader";
+import seedRouter from './src/assignment13/route';
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,6 +21,8 @@ app.get("/", (req, res) => {
 app.get("/test", (req, res) => {
   res.status(200).send("Headers set");
 });
+
+app.use('/seed', seedRouter)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
