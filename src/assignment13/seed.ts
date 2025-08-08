@@ -40,22 +40,21 @@ const SeededData = async () => {
 };
 
 export const handleSeedData = async (req: Request, res: Response, next : NextFunction) => {
-    console.log("Seed");
   try {
-    console.log("1");
     mongoDB();
 
     if((await Order.countDocuments()) > 0){
         console.log("Count :", await Order.countDocuments());
         await Order.deleteMany();
     }
-    console.log("2");
+    
     const seedData = await SeededData();
-    console.log("3");
+    
     const data = await Order.insertMany(seedData);
-    // console.log("Data Inserted", data);
+
     res.status(201).json({ msg: "Seeded data"});
     next();
+    
   } catch (err) {
     console.log("Error in handleSeed", err);
   }

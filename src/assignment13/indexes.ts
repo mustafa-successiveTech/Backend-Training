@@ -1,11 +1,12 @@
 import { Order } from "./model";
 
 export const checkIndex = async () => {
+
   const indexes = await Order.collection.getIndexes();
   console.log("Indexes :", indexes);
 
-//   const createIndex = await Order.collection.createIndex({ customerName: 1 });
-//   console.log("CreateIndex :", createIndex);
+  const createIndex = await Order.collection.createIndex({ customerName: 1 });
+  console.log("CreateIndex :", createIndex);
 
   const obs1 = await Order.collection
     .find({
@@ -20,6 +21,7 @@ export const checkIndex = async () => {
     status: 1,
     orderDate: -1,
   });
+  
   console.log("Custom Index :", customIndex);
 
   const obs2 = await Order.collection

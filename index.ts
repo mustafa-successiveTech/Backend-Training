@@ -22,7 +22,6 @@ app.get("/test", (req, res) => {
   res.status(200).send("Headers set");
 });
 
-console.log("1");
 app.use('/seed', seedRouter)
 
 app.listen(PORT, () => {
